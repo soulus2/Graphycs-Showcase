@@ -1,0 +1,14 @@
+[gd_scene load_steps=7 format=3 uid="uid://rla0nlf100t8"]
+
+[ext_resource type="Script" uid="uid://3w7m0mo7hben" path="res://scenes/512_scene.gd" id="1_db47n"]
+[ext_resource type="PackedScene" uid="uid://b41gu5v1tli5u" path="res://scenes/vertex_wiggle_demo.tscn" id="2_cfmu5"]
+[ext_resource type="PackedScene" uid="uid://0fnrc5bbtnh7" path="res://scenes/uv_demo.tscn" id="3_d2has"]
+[ext_resource type="PackedScene" uid="uid://crkus74a2gr8i" path="res://scenes/fragment_wiggle_demo.tscn" id="3_l8r3r"]
+[ext_resource type="PackedScene" uid="uid://dwg0i8wxrlk6e" path="res://scenes/circle_demo.tscn" id="5_arplc"]
+[ext_resource type="PackedScene" uid="uid://y6do8fywvls2" path="res://scenes/island_demo.tscn" id="6_qh5fj"]
+
+[node name="512-scene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_db47n")
+scenes = Array[PackedScene]([ExtResource("2_cfmu5"), ExtResource("3_l8r3r"), ExtResource("3_d2has"), ExtResource("5_arplc"), ExtResource("6_qh5fj")])

@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://crkus74a2gr8i"]
+
+[ext_resource type="Script" uid="uid://dd0fcvk15dc6q" path="res://scenes/fragment_wiggle_demo.gd" id="2_stqtr"]
+[ext_resource type="Shader" uid="uid://bgrwun531i5ir" path="res://shaders/fragment_wiggle_demo.gdshader" id="2_v26fv"]
+[ext_resource type="Texture2D" uid="uid://c65nv0rqm1im2" path="res://icon.svg" id="3_ab6o7"]
+[ext_resource type="Theme" uid="uid://css3yix420bd6" path="res://theme.tres" id="4_ab6o7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vim51"]
+shader = ExtResource("2_v26fv")
+shader_parameter/tex = ExtResource("3_ab6o7")
+shader_parameter/amplitude = 10.0
+shader_parameter/freq = 10.0
+shader_parameter/r = true
+shader_parameter/g = true
+shader_parameter/b = true
+shader_parameter/separation_level = 0.0
+
+[node name="MeshInstance2D" type="TextureRect"]
+material = SubResource("ShaderMaterial_vim51")
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 384.0
+texture = ExtResource("3_ab6o7")
+script = ExtResource("2_stqtr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -96.0
+offset_right = 264.0
+offset_bottom = -32.0
+theme = ExtResource("4_ab6o7")
+text = "Fragment Showcase"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 272.0
+offset_right = 320.0
+offset_bottom = 322.0
+alignment = 1
+
+[node name="R" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+theme = ExtResource("4_ab6o7")
+text = "R"
+flat = true
+
+[node name="G" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+theme = ExtResource("4_ab6o7")
+text = "G"
+
+[node name="B" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+theme = ExtResource("4_ab6o7")
+text = "B"
+
+[connection signal="toggled" from="HBoxContainer/R" to="." method="_on_r_toggled"]
+[connection signal="toggled" from="HBoxContainer/G" to="." method="_on_g_toggled"]
+[connection signal="toggled" from="HBoxContainer/B" to="." method="_on_b_toggled"]

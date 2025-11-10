@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://css3yix420bd6"]
+
+[ext_resource type="Texture2D" uid="uid://bw2vsmf5sf4d8" path="res://UI/checked.svg" id="1_cjfk0"]
+[ext_resource type="Texture2D" uid="uid://d07spdtqm6u6s" path="res://UI/unchecked.svg" id="2_vj6dk"]
+[ext_resource type="FontFile" uid="uid://bavnku2ne6qfx" path="res://fonts/AgaveNerdFont-Bold.ttf" id="3_vj6dk"]
+
+[resource]
+CheckBox/icons/checked = ExtResource("1_cjfk0")
+CheckBox/icons/unchecked = ExtResource("2_vj6dk")
+Label/colors/font_outline_color = Color(0.10980392, 0.12156863, 0.18039216, 1)
+Label/constants/outline_size = 10
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("3_vj6dk")

@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://b41gu5v1tli5u"]
+
+[ext_resource type="Shader" uid="uid://d1yt5b507rkgk" path="res://shaders/vertex_wiggle_demo.gdshader" id="1_hh152"]
+[ext_resource type="Texture2D" uid="uid://c65nv0rqm1im2" path="res://icon.svg" id="2_pbqab"]
+[ext_resource type="Script" uid="uid://i3q7q7u2s4k1" path="res://scenes/vertex_wiggle_demo.gd" id="2_q0rir"]
+[ext_resource type="Theme" uid="uid://css3yix420bd6" path="res://theme.tres" id="3_s23gt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hh152"]
+shader = ExtResource("1_hh152")
+shader_parameter/mesh_height = 256.0
+shader_parameter/freq = 10.0
+shader_parameter/amplitude = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vim51"]
+shader = ExtResource("1_hh152")
+shader_parameter/mesh_height = 256.0
+shader_parameter/freq = 3.142
+shader_parameter/amplitude = 10.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_hh152"]
+size = Vector2(256, 256)
+subdivide_depth = 1
+
+[node name="Vertex_Wiggle_demo" type="Node2D"]
+material = SubResource("ShaderMaterial_hh152")
+script = ExtResource("2_q0rir")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+material = SubResource("ShaderMaterial_vim51")
+position = Vector2(256, 256)
+scale = Vector2(1, -1)
+mesh = SubResource("QuadMesh_hh152")
+texture = ExtResource("2_pbqab")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 384.0
+offset_bottom = 96.0
+theme = ExtResource("3_s23gt")
+text = "Vertex Showcase"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 384.0
+offset_right = 384.0
+offset_bottom = 448.0
+theme = ExtResource("3_s23gt")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

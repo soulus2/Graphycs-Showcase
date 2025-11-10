@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://0fnrc5bbtnh7"]
+
+[ext_resource type="Shader" uid="uid://d16n6dwmvbo6q" path="res://shaders/UV_demo.gdshader" id="1_hnsvh"]
+[ext_resource type="Script" uid="uid://chbai80fn4aii" path="res://scenes/uv_demo.gd" id="2_q7c0q"]
+[ext_resource type="Theme" uid="uid://css3yix420bd6" path="res://theme.tres" id="3_acns7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7c0q"]
+shader = ExtResource("1_hnsvh")
+shader_parameter/show_x = true
+shader_parameter/show_y = true
+shader_parameter/open_gl = true
+shader_parameter/canvas_size = Vector2(128, 128)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_acns7"]
+
+[node name="UV_Demo" type="TextureRect"]
+material = SubResource("ShaderMaterial_q7c0q")
+offset_left = 128.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 384.0
+texture = SubResource("PlaceholderTexture2D_acns7")
+script = ExtResource("2_q7c0q")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 272.0
+offset_right = 320.0
+offset_bottom = 320.0
+alignment = 1
+
+[node name="X" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+theme = ExtResource("3_acns7")
+text = "X"
+flat = true
+
+[node name="Y" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+theme = ExtResource("3_acns7")
+text = "Y"
+
+[node name="Z" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+focus_behavior_recursive = 1
+theme = ExtResource("3_acns7")
+text = "Z"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = -96.0
+offset_right = 256.0
+offset_bottom = -32.0
+theme = ExtResource("3_acns7")
+text = "UV Showcase"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="HBoxContainer/X" to="." method="_on_x_toggled"]
+[connection signal="toggled" from="HBoxContainer/Y" to="." method="_on_y_toggled"]
+[connection signal="toggled" from="HBoxContainer/Z" to="." method="_on_z_toggled"]
+[connection signal="toggled" from="HBoxContainer/Z" to="." method="_on_open_gl_toggled"]

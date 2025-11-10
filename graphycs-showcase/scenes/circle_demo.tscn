@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwg0i8wxrlk6e"]
+
+[ext_resource type="Shader" uid="uid://1isuoa0ne6j7" path="res://shaders/circle_demo.gdshader" id="1_jh5sp"]
+[ext_resource type="Script" uid="uid://mnv581qfp2ra" path="res://scenes/circle_demo.gd" id="2_f8hxq"]
+[ext_resource type="Theme" uid="uid://css3yix420bd6" path="res://theme.tres" id="3_345ha"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f8hxq"]
+shader = ExtResource("1_jh5sp")
+shader_parameter/radius = 153
+shader_parameter/canvas_size = Vector2(512, 512)
+shader_parameter/offset = Vector2(256, 256)
+shader_parameter/fg_col = Vector4(1, 1, 1, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_345ha"]
+
+[node name="Circle_demo" type="TextureRect"]
+material = SubResource("ShaderMaterial_f8hxq")
+offset_right = 512.0
+offset_bottom = 512.0
+texture = SubResource("PlaceholderTexture2D_345ha")
+script = ExtResource("2_f8hxq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 384.0
+offset_bottom = 96.0
+theme = ExtResource("3_345ha")
+text = "Circle Showcase"
+horizontal_alignment = 1
+vertical_alignment = 1

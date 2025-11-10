@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://y6do8fywvls2"]
+
+[ext_resource type="Theme" uid="uid://css3yix420bd6" path="res://theme.tres" id="2_6pt11"]
+[ext_resource type="Script" uid="uid://03jafy87yuvf" path="res://scenes/island_demo.gd" id="2_cn5l2"]
+[ext_resource type="Texture2D" uid="uid://bqa2dut6bg85w" path="res://shaders/island_demo_noise.tres" id="2_mbl0y"]
+
+[sub_resource type="Shader" id="Shader_6pt11"]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D noise_texture : filter_nearest;
+uniform float water_level : hint_range(0.0, 1.0);
+uniform float shore_line_width = 0.1;
+uniform float peak = 0.1;
+
+uniform vec4 peak_light : source_color;
+uniform vec4 peak_dark : source_color;
+uniform vec4 land_light : source_color;
+uniform vec4 land_dark : source_color;
+uniform vec4 shore_line_light : source_color;
+uniform vec4 shore_line_dark : source_color;
+uniform vec4 water_shallow : source_color;
+uniform vec4 water_deep : source_color;
+
+float remap(float value, float in_min, float in_max, float out_min, float out_max) {
+    return clamp((value - in_min) / (in_max - in_min), 0.0, 1.0) * (out_max - out_min) + out_min;
+}
+
+void fragment() {
+    float n = texture(noise_texture, UV).r;
+    vec4 out_t;
+    if (n <= water_level) {
+        float t = remap(n, 0.0, water_level, 0.0, 1.0);
+        out_t = mix(water_deep, water_shallow, t);
+    } 
+    else if (n <= water_level + shore_line_width) {
+        float t = remap(n, water_level, water_level + shore_line_width, 0.0, 1.0);
+        out_t = mix(shore_line_light,shore_line_dark, t);
+    } 
+    else if (n < 1.0 - peak) {
+        float t = remap(n, water_level + shore_line_width, 1.0 - peak, 0.0, 1.0);
+        out_t = mix(land_light,land_dark, t);
+    } 
+    else {
+        float t = remap(n, 1.0 - peak, 1.0, 0.0, 1.0);
+        out_t = mix(peak_dark, peak_light, t);
+    }
+
+    COLOR = out_t;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mbl0y"]
+shader = SubResource("Shader_6pt11")
+shader_parameter/noise_texture = ExtResource("2_mbl0y")
+shader_parameter/water_level = 0.3330000158175
+shader_parameter/shore_line_width = 0.1
+shader_parameter/peak = 0.155
+shader_parameter/peak_light = Color(1, 1, 1, 1)
+shader_parameter/peak_dark = Color(0.57244873, 0.6484375, 0.5946121, 1)
+shader_parameter/land_light = Color(0.50801086, 0.66015625, 0.5784065, 1)
+shader_parameter/land_dark = Color(0.2947998, 0.41015625, 0.31712687, 1)
+shader_parameter/shore_line_light = Color(0.98046875, 0.95589316, 0.76982117, 1)
+shader_parameter/shore_line_dark = Color(0.70860636, 0.75, 0.5361328, 1)
+shader_parameter/water_shallow = Color(0.27859497, 0.48594466, 0.69921875, 1)
+shader_parameter/water_deep = Color(0.15294118, 0.23137255, 0.4392157, 1)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_85o84"]
+
+[node name="Island_demo" type="TextureRect"]
+material = SubResource("ShaderMaterial_mbl0y")
+offset_right = 512.0
+offset_bottom = 512.0
+texture = SubResource("PlaceholderTexture2D_85o84")
+script = ExtResource("2_cn5l2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 384.0
+offset_bottom = 96.0
+theme = ExtResource("2_6pt11")
+text = "Islands Showcase"
+horizontal_alignment = 1
+vertical_alignment = 1
